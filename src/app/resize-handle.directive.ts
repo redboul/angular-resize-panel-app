@@ -8,8 +8,13 @@ export class ResizeHandleDirective {
   private mouseDown: boolean = false;
   private width: number;
   private height: number;
-  public mouseMove: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+  public mouseMove$: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+  public mouseDown$: EventEmitter<string> = new EventEmitter<string>();
   constructor(private element: ElementRef) { }
+
+  @HostListener('click') onClick() {
+    this.mouseDown$.next('click');
+  }
 
   @HostListener('mousedown') onMouseDown() {
     this.mouseDown = true;
@@ -20,9 +25,8 @@ export class ResizeHandleDirective {
   }
   @HostListener('document:mousemove', ['$event']) onMouseMove(event: MouseEvent) {
     if (this.mouseDown) {
-      console.log('mousemove!', event);
-      console.log(this.element.nativeElement);
-      this.mouseMove.next(event);
+      console.log('mousemove!');
+      this.mouseMove$.next(event);
       event.preventDefault();
       event.stopPropagation();
     }
