@@ -4,10 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { ResizePanelDirective } from './resize-panel.directive';
+import { ResizeHandleDirective } from './resize-handle.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ResizePanelDirective,
+    ResizeHandleDirective
   ],
   imports: [
     BrowserModule,

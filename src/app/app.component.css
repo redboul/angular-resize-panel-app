@@ -1,0 +1,23 @@
+.square {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    min-height: 100px;
+    min-width: 100px;
+}
+[resize-handle] {
+    position: absolute;
+    right: 0;
+    top: -10px;
+}
+
+[resize-handle].vertical {
+    position: absolute;
+    left: -15px;
+    top: 0;
+}
+[resize-handle].vertical img {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
