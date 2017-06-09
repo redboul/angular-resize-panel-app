@@ -14,6 +14,8 @@ export class ResizePanelDirective implements AfterViewInit {
   @Input('resize-panel') private direction: string;
   private height: number = 0;
   private width: number = 0;
+  private formerHeight: number = 0;
+  private formerWidth: number = 0;
 
   @ContentChildren(ResizeHandleDirective)
   private resizeHandles: QueryList<ResizeHandleDirective>;
@@ -38,8 +40,16 @@ export class ResizePanelDirective implements AfterViewInit {
   togglePanel() {
     console.log('coucou');
     if (this.direction === 'x') {
-      this.el.nativeElement.style.width = 0;
-      this.el.nativeElement.style['min-width'] = 0;
+      if (this.el.nativeElement.style['max-width'] === '0px') {
+        //this.el.nativeElement.style.width = this.formerWidth;
+        this.el.nativeElement.style['min-width'] = '';
+        this.el.nativeElement.style['max-width'] = '';
+      } else {
+        //this.formerWidth = this.el.nativeElement.style.width;
+        //this.el.nativeElement.style.width = 0;
+        this.el.nativeElement.style['min-width'] = '0px';
+        this.el.nativeElement.style['max-width'] = '0px';
+      }
     } else if (this.direction === 'y') {
       this.el.nativeElement.style.height = 0;
       this.el.nativeElement.style['min-height'] = 0;

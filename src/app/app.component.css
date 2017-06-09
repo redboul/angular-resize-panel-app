@@ -1,22 +1,24 @@
 .square {
-    width: 100px;
-    height: 100px;
+    width: 245px;
+    height: 145px;
     position: absolute;
     min-height: 100px;
     min-width: 100px;
+    /*transition: width 0.5s ease-out, height 2s ease-out;*/
 }
 [resize-handle] {
     position: absolute;
-    right: 0;
     top: -10px;
+    height: 10px;
+    width: 100%;
+    background:  no-repeat center/20px url('https://www.materialui.co/materialIcons/editor/drag_handle_black_192x192.png') white;
 }
 
 [resize-handle].vertical {
-    position: absolute;
-    left: -15px;
-    top: 0;
+    right: calc(50% - 5px);
+    top: calc(50% - 5px);
 }
-[resize-handle].vertical img {
+[resize-handle].vertical {
     -ms-transform: rotate(90deg); /* IE 9 */
     -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
     transform: rotate(90deg);
