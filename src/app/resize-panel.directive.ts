@@ -47,7 +47,7 @@ export class ResizePanelDirective implements AfterViewInit {
       } else {
         //this.formerWidth = this.el.nativeElement.style.width;
         //this.el.nativeElement.style.width = 0;
-        this.el.nativeElement.style['min-width'] = '0px';
+        this.el.nativeElement.style['min-width'] = '6px';
         this.el.nativeElement.style['max-width'] = '0px';
       }
     } else if (this.direction === 'y') {
