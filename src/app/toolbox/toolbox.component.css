@@ -1,0 +1,68 @@
+.toolbox-content {
+    margin-left: 6px;
+}
+
+.square {
+    width: 25%;
+    height: 25%;
+    position: absolute;
+    min-height: 100px;
+    min-width: 30px;
+    overflow: hidden;
+    /*transition: width 0.5s ease-out, height 2s ease-out;*/
+}
+
+.handleBar {
+  width: 100%;
+  position: absolute;
+  background-color: #222;
+  height: 6px;
+  top: 0;
+  cursor: ns-resize;
+}
+.handle {
+  width: 20px;
+  height: 2px;
+  position: absolute;
+  top: 2px;
+  left: calc(50% - 10px);
+  background-color: #DDD;
+  border-radius: 20%;
+}
+
+
+.handleBar-vertical {
+  height: 100%;
+  position: absolute;
+  background-color: #222;
+  width: 6px;
+  left: 0;
+  cursor: ew-resize;
+}
+.handle-vertical {
+  height: 20px;
+  width: 2px;
+  position: absolute;
+  left: 2px;
+  top: calc(50% - 10px);
+  background-color: #DDD;
+  border-radius: 20%;
+}
+
+/*[resize-handle] {
+    position: absolute;
+    top: -10px;
+    height: 10px;
+    width: 100%;
+    background:  no-repeat center/20px url('https://www.materialui.co/materialIcons/editor/drag_handle_black_192x192.png') white;
+}*/
+
+[resize-handle].vertical {
+    right: calc(50% - 5px);
+    top: calc(50% - 5px);
+}
+[resize-handle].vertical {
+    -ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}

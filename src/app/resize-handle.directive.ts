@@ -24,9 +24,10 @@ export class ResizeHandleDirective {
   @HostListener('mousedown') onMouseDown() {
     this.unsubscribeFromEvent();
     this.mouseMoveSubscription = Observable.fromEvent(document, 'mousemove').subscribe((event: MouseEvent) => this.onMouseMove(event));
-    this.mouseUpSubscription = Observable.fromEvent(document, 'mouseup').subscribe(() => this.onMouseUp());
+    this.mouseUpSubscription = Observable.fromEvent(document, 'mouseup').subscribe((event) => this.onMouseUp(event));
   }
-  onMouseUp() {
+  onMouseUp(event) {
+    event.preventDefault();
     this.unsubscribeFromEvent();
   }
 
@@ -41,7 +42,6 @@ export class ResizeHandleDirective {
     }
   }
   onMouseMove(event: MouseEvent) {
-    console.log('mousemove!');
     this.mouseMove$.next(event);
     event.preventDefault();
     event.stopPropagation();

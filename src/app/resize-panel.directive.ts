@@ -1,9 +1,18 @@
-import { Input, Directive, ElementRef, ContentChildren, AfterViewInit, QueryList } from '@angular/core';
+import { Output, Input, EventEmitter, Directive, ElementRef, ContentChildren, AfterViewInit, QueryList } from '@angular/core';
 import 'rxjs/add/operator/buffer';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
+
 import { ResizeHandleDirective } from './resize-handle.directive';
 
 @Directive({
@@ -12,6 +21,7 @@ import { ResizeHandleDirective } from './resize-handle.directive';
 export class ResizePanelDirective implements AfterViewInit {
 
   @Input('resize-panel') private direction: string;
+  @Output() handleClick = new EventEmitter<boolean>(true);
   private height: number = 0;
   private width: number = 0;
   private formerHeight: number = 0;
@@ -31,9 +41,14 @@ export class ResizePanelDirective implements AfterViewInit {
     this.resizeHandles.forEach((handle: ResizeHandleDirective) => {
       handle.mouseMove$.subscribe(mouseEvent => this.increaseSize(mouseEvent));
       handle.mouseDown$.do(() => console.log('click!'))
-        .buffer(handle.mouseDown$.debounceTime(200))
+        .buffer(handle.mouseDown$.debounceTime(250))
         .filter(eventArray => eventArray.length > 1)
-        .map(eventArray => eventArray[0]).subscribe(mouseEvent => this.togglePanel());
+        .map(eventArray => eventArray[0])
+        .subscribe(() => {
+          this.width = 0;
+          this.handleClick.next(true)
+        });
+        //.subscribe(mouseEvent => this.togglePanel());
     });
   }
 
