@@ -1,19 +1,13 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { animate, animateChild, state, style, transition, trigger } from '@angular/animations';
+import { animation } from '@angular/animations';
 
-export const slideIn = trigger('slideIn', [
-  state('*', style({
-    width: '0',
-  })),
-  state('in', style({
-    'min-width': '100px',
-    'max-width': '300px',
-    width: '*'
-  })),
-  state('out',   style({
-    'min-width': '20px',
-    'max-width': '0',
-    width: '0'
-  })),
-  transition('out => in', animate('300ms ease-out')),
-  transition('in => out', animate('300ms ease-out'))
+const slideIn = animation([ animate('400ms ease', style({
+    width: '{{ width }}px'
+  }))]);
+const slideOut = animation([ animate('400ms ease', style({
+    width: '30px'
+  }))]);
+export const slide = trigger('slide', [
+  transition('* => out', [slideOut]),
+  transition('out => in', [slideIn], { params: {width: 140} })
 ]);

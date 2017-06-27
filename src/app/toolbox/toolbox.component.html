@@ -1,5 +1,6 @@
-<div class="square second toolbox" resize-panel (handleClick)="togglePanel()" [@slideIn]="slideInState" >
-   <div class="handleBar-vertical" resize-handle >
+<div class="square second toolbox" resize-panel (handleClick)="togglePanel($event)" 
+(@slide.done)="animationDone($event)" [@slide]="slideState" >
+   <div class="handleBar-vertical" resize-handle>
       <div class="handle-vertical"></div>
   
     </div>

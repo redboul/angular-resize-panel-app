@@ -1,31 +1,39 @@
-import { slideIn } from '../animations';
+import { slide } from '../animations';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-toolbox',
   templateUrl: './toolbox.component.html',
   styleUrls: ['./toolbox.component.css'],
-  animations: [ slideIn ]
+  animations: [ slide ]
 })
 export class ToolboxComponent implements OnInit {
-  slideInState = 'in';
+  slideState: any = { value: 'in'};
   constructor() { }
 
   ngOnInit() {
   }
 
   openPanel() {
-    if(this.slideInState === 'out') {
-      this.slideInState = 'in';
+    this.togglePanel({width: 140})
+  }
+
+  animationDone(event) {
+    if (this.slideState && this.slideState.params && this.slideState.params.width) {
+      event.element.style.width = this.slideState.params.width + 'px';
     }
   }
 
-  togglePanel(){
-    if(this.slideInState === 'in') {
-      this.slideInState = 'out';
+  togglePanel(event) {
+    if (event.type) {
+      this.slideState = { value: 'cancel' };
     } else {
-      this.slideInState = 'in';
+      if (this.slideState.value !== 'out') {
+        this.slideState = { value: 'out', params: { width: 30 }};
+      } else {
+        this.slideState = { value: 'in', params: { width: event.width } };
+      }
     }
   }
 

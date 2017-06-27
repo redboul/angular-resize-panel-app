@@ -9,6 +9,7 @@ import 'rxjs/add/observable/fromEvent';
 export class ResizeHandleDirective {
 
   private mouseDown: boolean = false;
+  private currentEvent;
   private width: number;
   private height: number;
   private mouseUpSubscription: Subscription;
@@ -17,17 +18,25 @@ export class ResizeHandleDirective {
   public mouseDown$: EventEmitter<string> = new EventEmitter<string>();
   constructor(private element: ElementRef) { }
 
-  @HostListener('click') onClick() {
-    this.mouseDown$.next('click');
+  @HostListener('click', ['$event']) onClick(event) {
+    //this.currentEvent = event;
+    //event.preventDefault();
+    //event.stopPropagation();
+    
   }
 
-  @HostListener('mousedown') onMouseDown() {
+  @HostListener('mousedown', ['$event']) onMouseDown(mouseDownEvent: MouseEvent) {
+    this.currentEvent = mouseDownEvent;
     this.unsubscribeFromEvent();
     this.mouseMoveSubscription = Observable.fromEvent(document, 'mousemove').subscribe((event: MouseEvent) => this.onMouseMove(event));
-    this.mouseUpSubscription = Observable.fromEvent(document, 'mouseup').subscribe((event) => this.onMouseUp(event));
+    this.mouseUpSubscription = Observable.fromEvent(document, 'mouseup').subscribe((event: MouseEvent) => this.onMouseUp(event));
   }
-  onMouseUp(event) {
+  onMouseUp(event: MouseEvent) {
     event.preventDefault();
+    event.stopPropagation();
+    if (event.screenX === this.currentEvent.screenX && event.screenY === this.currentEvent.screenY) {
+      this.mouseDown$.next('click');
+    }
     this.unsubscribeFromEvent();
   }
 
@@ -45,8 +54,6 @@ export class ResizeHandleDirective {
     this.mouseMove$.next(event);
     event.preventDefault();
     event.stopPropagation();
-  }
-  topRightResize(offsetX: number, offsetY: number) {
   }
 
 }
