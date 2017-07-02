@@ -44,7 +44,7 @@ export class ResizePanelDirective implements AfterViewInit {
     this.resizeHandles.forEach((handle: ResizeHandleDirective) => {
       handle.mouseMove$.subscribe(mouseEvent => this.increaseSize(mouseEvent));
       handle.mouseDown$
-        .subscribe((event) => this.handleClick.next({ width: this.originalWidth }));
+        .subscribe((event) => this.handleClick.next({ width: this.originalWidth, height: this.originalHeight }));
     });
   }
 
@@ -57,7 +57,7 @@ export class ResizePanelDirective implements AfterViewInit {
       }
     } else if (this.direction === 'y') {
       if (this.el.nativeElement.offsetHeight <= this.minSize) {
-        this.el.nativeElement.style.Height = this.originalHeight + 'px';
+        this.el.nativeElement.style.height = this.originalHeight + 'px';
       } else {
         this.el.nativeElement.style.height = this.minSize + 'px';
       }

@@ -1,15 +1,15 @@
-import { slide } from '../animations';
+import { slideHorizontal } from '../animations';
 import { eventTypes } from '../event-types';
 
 import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-toolbox',
-  templateUrl: './toolbox.component.html',
-  styleUrls: ['./toolbox.component.css'],
-  animations: [ slide ]
+  selector: 'horizontal-slider',
+  templateUrl: './horizontal-slider.component.html',
+  styleUrls: ['./horizontal-slider.component.css'],
+  animations: [ slideHorizontal ]
 })
-export class ToolboxComponent implements OnInit {
+export class HorizontalSliderComponent implements OnInit {
   slideState: any = { value: 'in'};
   constructor() { }
 

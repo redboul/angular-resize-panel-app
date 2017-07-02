@@ -5,9 +5,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { ResizePanelDirective } from './resize-panel.directive';
+import { HorizontalSliderComponent } from './horizontal-slider/horizontal-slider.component';
+import { VerticalSliderComponent } from './vertical-slider/vertical-slider.component';
 import { ResizeHandleDirective } from './resize-handle.directive';
-import { ToolboxComponent } from './toolbox/toolbox.component';
+import { ResizePanelDirective } from './resize-panel.directive';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
@@ -15,8 +16,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AppComponent,
     ResizePanelDirective,
     ResizeHandleDirective,
-    ToolboxComponent,
-    SidebarComponent
+    HorizontalSliderComponent,
+    VerticalSliderComponent,
   ],
   imports: [
     BrowserModule,
