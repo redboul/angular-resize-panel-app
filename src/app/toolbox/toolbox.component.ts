@@ -1,4 +1,5 @@
 import { slide } from '../animations';
+import { eventTypes } from '../event-types';
 
 import { Component, ElementRef, OnInit } from '@angular/core';
 
@@ -16,7 +17,7 @@ export class ToolboxComponent implements OnInit {
   }
 
   openPanel() {
-    this.togglePanel({width: 140})
+    this.togglePanel({type: eventTypes.clickeInside, width: 140});
   }
 
   animationDone(event) {
@@ -26,12 +27,12 @@ export class ToolboxComponent implements OnInit {
   }
 
   togglePanel(event) {
-    if (event.type) {
+    if (event.type === eventTypes.cancel) {
       this.slideState = { value: 'cancel' };
     } else {
-      if (this.slideState.value !== 'out') {
+      if (this.slideState.value !== 'out' && event.type !== eventTypes.clickeInside) {
         this.slideState = { value: 'out', params: { width: 30 }};
-      } else {
+      } else if (this.slideState.value === 'out') {
         this.slideState = { value: 'in', params: { width: event.width } };
       }
     }

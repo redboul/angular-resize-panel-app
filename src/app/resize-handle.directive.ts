@@ -8,22 +8,13 @@ import 'rxjs/add/observable/fromEvent';
 })
 export class ResizeHandleDirective {
 
-  private mouseDown: boolean = false;
+  private mouseDown = false;
   private currentEvent;
-  private width: number;
-  private height: number;
   private mouseUpSubscription: Subscription;
   private mouseMoveSubscription: Subscription;
   public mouseMove$: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   public mouseDown$: EventEmitter<string> = new EventEmitter<string>();
   constructor(private element: ElementRef) { }
-
-  @HostListener('click', ['$event']) onClick(event) {
-    //this.currentEvent = event;
-    //event.preventDefault();
-    //event.stopPropagation();
-    
-  }
 
   @HostListener('mousedown', ['$event']) onMouseDown(mouseDownEvent: MouseEvent) {
     this.currentEvent = mouseDownEvent;
