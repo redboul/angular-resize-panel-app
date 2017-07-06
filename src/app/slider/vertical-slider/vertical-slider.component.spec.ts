@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { VerticalSliderComponent } from './vertical-slider.component';
 
 
 describe('VerticalSliderComponent', () => {

@@ -23,51 +23,27 @@ import { ResizeHandleDirective } from './resize-handle.directive';
 export class ResizePanelDirective implements AfterViewInit {
 
   @Input('resize-panel') private direction: string;
-  @Input() private minSize = 60;
   @Output() handleClick = new EventEmitter<any>();
-  private height = 0;
-  private width = 0;
   private originalWidth = 0;
   private originalHeight = 0;
-  private handleTarget;
 
   @ContentChildren(ResizeHandleDirective)
   private resizeHandles: QueryList<ResizeHandleDirective>;
-  private resizeHandle: ResizeHandleDirective;
 
   constructor(private el: ElementRef) {
   }
 
   ngAfterViewInit() {
     this.direction = this.direction || 'x';
-    this.height = this.originalHeight = this.el.nativeElement.offsetHeight;
-    this.width = this.originalWidth = this.el.nativeElement.offsetWidth;
+    this.originalHeight = this.el.nativeElement.offsetHeight;
+    this.originalWidth = this.el.nativeElement.offsetWidth;
     this.resizeHandles.forEach((handle: ResizeHandleDirective) => {
-      this.resizeHandle = handle;
       handle.mouseMove$.subscribe(mouseEvent => this.increaseSize(mouseEvent));
       handle.mouseDown$
         .subscribe((event) => {
           this.handleClick.next({ width: this.originalWidth, height: this.originalHeight });
-          this.handleTarget = event.target;
         });
-
     });
-  }
-
-  togglePanel() {
-    if (this.direction === 'x') {
-      if (this.el.nativeElement.offsetWidth <= this.minSize) {
-        this.el.nativeElement.style.width = this.originalWidth + 'px';
-      } else {
-        this.el.nativeElement.style.width = this.minSize + 'px';
-      }
-    } else if (this.direction === 'y') {
-      if (this.el.nativeElement.offsetHeight <= this.minSize) {
-        this.el.nativeElement.style.height = this.originalHeight + 'px';
-      } else {
-        this.el.nativeElement.style.height = this.minSize + 'px';
-      }
-    }
   }
 
   increaseSize(event: MouseEvent) {

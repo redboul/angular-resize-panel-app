@@ -5,25 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HorizontalSliderComponent } from './horizontal-slider/horizontal-slider.component';
-import { VerticalSliderComponent } from './vertical-slider/vertical-slider.component';
-import { ResizeHandleDirective } from './resize-handle.directive';
-import { ResizePanelDirective } from './resize-panel.directive';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { SliderModule } from './slider';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ResizePanelDirective,
-    ResizeHandleDirective,
-    HorizontalSliderComponent,
-    VerticalSliderComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
