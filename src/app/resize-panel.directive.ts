@@ -72,27 +72,11 @@ export class ResizePanelDirective implements AfterViewInit {
 
   increaseSize(event: MouseEvent) {
     this.handleClick.next({ type: eventTypes.cancel });
+      const rect = this.el.nativeElement.getBoundingClientRect();
     if (this.direction === 'x') {
-      if (this.isInsideXHandle(event.pageX)) {
-        this.el.nativeElement.style.width = (this.el.nativeElement.offsetWidth - event.movementX) + 'px';
-      }
+        this.el.nativeElement.style.width = (rect.width + (rect.left - event.pageX)) + 'px';
     } else if (this.direction === 'y' && event.movementY) {
-      if (this.isInsideYHandle(event.pageY)) {
-        this.el.nativeElement.style.height = (this.el.nativeElement.offsetHeight - event.movementY) + 'px';
-      } else {
-        console.log('failed!!');
-      }
+        this.el.nativeElement.style.height = (rect.height + (rect.top - event.pageY)) + 'px';
     }
-  }
-  isInsideXHandle(pageX) {
-    const rect = this.resizeHandle.currentEvent.target.getBoundingClientRect();
-    return pageX <= rect.right &&
-        pageX >= rect.left;
-  }
-
-  isInsideYHandle(pageY) {
-    const rect = this.resizeHandle.currentEvent.target.getBoundingClientRect();
-    return pageY <= rect.bottom &&
-        pageY >= rect.top;
   }
 }
