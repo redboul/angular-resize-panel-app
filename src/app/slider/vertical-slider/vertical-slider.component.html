@@ -3,5 +3,5 @@
    <div class="handleBar" resize-handle>
       <div class="handle"></div>
     </div>
-    <div class="vertical-slider-content" (click)="openPanel()"><ng-content></ng-content></div>
+    <div class="vertical-slider-content" (click)="openPanel()" (touchstart)="openPanel()"><ng-content></ng-content></div>
 </div>
