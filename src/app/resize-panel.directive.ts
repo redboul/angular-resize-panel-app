@@ -29,6 +29,7 @@ export class ResizePanelDirective implements AfterViewInit {
   private width = 0;
   private originalWidth = 0;
   private originalHeight = 0;
+  private handleTarget;
 
   @ContentChildren(ResizeHandleDirective)
   private resizeHandles: QueryList<ResizeHandleDirective>;
@@ -42,9 +43,14 @@ export class ResizePanelDirective implements AfterViewInit {
     this.height = this.originalHeight = this.el.nativeElement.offsetHeight;
     this.width = this.originalWidth = this.el.nativeElement.offsetWidth;
     this.resizeHandles.forEach((handle: ResizeHandleDirective) => {
+      this.resizeHandle = handle;
       handle.mouseMove$.subscribe(mouseEvent => this.increaseSize(mouseEvent));
       handle.mouseDown$
-        .subscribe((event) => this.handleClick.next({ width: this.originalWidth, height: this.originalHeight }));
+        .subscribe((event) => {
+          this.handleClick.next({ width: this.originalWidth, height: this.originalHeight });
+          this.handleTarget = event.target;
+        });
+
     });
   }
 
@@ -67,9 +73,26 @@ export class ResizePanelDirective implements AfterViewInit {
   increaseSize(event: MouseEvent) {
     this.handleClick.next({ type: eventTypes.cancel });
     if (this.direction === 'x') {
-      this.el.nativeElement.style.width = (this.el.nativeElement.offsetWidth - event.movementX) + 'px';
-    } else if (this.direction === 'y') {
-      this.el.nativeElement.style.width = (this.el.nativeElement.offsetHeight - event.movementY) + 'px';
+      if (this.isInsideXHandle(event.pageX)) {
+        this.el.nativeElement.style.width = (this.el.nativeElement.offsetWidth - event.movementX) + 'px';
+      }
+    } else if (this.direction === 'y' && event.movementY) {
+      if (this.isInsideYHandle(event.pageY)) {
+        this.el.nativeElement.style.height = (this.el.nativeElement.offsetHeight - event.movementY) + 'px';
+      } else {
+        console.log('failed!!');
+      }
     }
+  }
+  isInsideXHandle(pageX) {
+    const rect = this.resizeHandle.currentEvent.target.getBoundingClientRect();
+    return pageX <= rect.right &&
+        pageX >= rect.left;
+  }
+
+  isInsideYHandle(pageY) {
+    const rect = this.resizeHandle.currentEvent.target.getBoundingClientRect();
+    return pageY <= rect.bottom &&
+        pageY >= rect.top;
   }
 }

@@ -9,14 +9,15 @@ import 'rxjs/add/observable/fromEvent';
 export class ResizeHandleDirective {
 
   private mouseDown = false;
-  private currentEvent;
+  public currentEvent;
   private mouseUpSubscription: Subscription;
   private mouseMoveSubscription: Subscription;
   public mouseMove$: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   public mouseDown$: EventEmitter<string> = new EventEmitter<string>();
   constructor(private element: ElementRef) { }
 
-  @HostListener('mousedown', ['$event']) onMouseDown(mouseDownEvent: MouseEvent) {
+  @HostListener('mousedown', ['$event'])
+  onMouseDown(mouseDownEvent: MouseEvent) {
     this.currentEvent = mouseDownEvent;
     this.unsubscribeFromEvent();
     this.mouseMoveSubscription = Observable.fromEvent(document, 'mousemove').subscribe((event: MouseEvent) => this.onMouseMove(event));
