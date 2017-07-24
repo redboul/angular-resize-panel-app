@@ -6,6 +6,8 @@ body {
 }
 .first {
     bottom: 0;
+}
+.red {
     background-color: red;
 }
 .second {

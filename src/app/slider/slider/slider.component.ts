@@ -10,13 +10,13 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
   animations: [ slide ]
 })
 export class SliderComponent implements OnInit {
-  @Input() orientation?: string;
+  @Input() direction?: string;
   slideState: any;
   type = '';
   constructor() { }
 
   ngOnInit() {
-    if (this.orientation === 'y') {
+    if (this.direction === 'y') {
       this.type = 'v';
     }
     this.slideState = { value: `${this.type}cancel`};
@@ -28,7 +28,7 @@ export class SliderComponent implements OnInit {
 
   animationDone(event) {
     if (this.slideState && this.slideState.params && this.slideState.params.amount) {
-      if (this.orientation === 'y') {
+      if (this.direction === 'y') {
         event.element.style.height = this.slideState.params.amount + 'px';
       } else {
         event.element.style.width = this.slideState.params.amount + 'px';

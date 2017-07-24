@@ -7,7 +7,13 @@
     /*transition: width 0.5s ease-out, height 2s ease-out;*/
 }
 
-.square-content {
+.carre {
+    position: absolute;
+    overflow: hidden;
+    /*transition: width 0.5s ease-out, height 2s ease-out;*/
+}
+
+.content {
   height: 100%;
   width: 100%;
   min-height: 100px;

@@ -22,7 +22,7 @@ import { ResizeHandleDirective } from './resize-handle.directive';
 })
 export class ResizePanelDirective implements AfterViewInit {
 
-  @Input('resize-panel') private direction: string;
+  @Input() private direction: string;
   @Output() handleClick = new EventEmitter<any>();
   private originalWidth = 0;
   private originalHeight = 0;
