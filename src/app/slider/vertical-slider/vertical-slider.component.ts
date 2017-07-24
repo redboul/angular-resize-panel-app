@@ -1,4 +1,4 @@
-import { slideVertical } from '../animations';
+import { slide } from '../animations';
 import { eventTypes } from '../event-types';
 
 import { Component, ElementRef, OnInit } from '@angular/core';
@@ -7,10 +7,10 @@ import { Component, ElementRef, OnInit } from '@angular/core';
   selector: 'vertical-slider',
   templateUrl: './vertical-slider.component.html',
   styleUrls: ['./vertical-slider.component.css'],
-  animations: [ slideVertical ]
+  animations: [ slide ]
 })
 export class VerticalSliderComponent implements OnInit {
-  slideState: any = { value: 'in'};
+  slideState: any = { value: 'vin'};
   constructor() { }
 
   ngOnInit() {

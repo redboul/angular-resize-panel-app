@@ -1,8 +1,0 @@
-<div class="square second toolbox" resize-panel (handleClick)="togglePanel($event)" 
-(@slide.done)="animationDone($event)" [@slide]="slideState" >
-   <div class="handleBar-vertical" resize-handle>
-      <div class="handle-vertical"></div>
-  
-    </div>
-    <div class="toolbox-content" (click)="openPanel()" (touchstart)="openPanel()"><ng-content></ng-content></div>
-</div>

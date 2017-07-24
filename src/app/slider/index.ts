@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { HorizontalSliderComponent } from './horizontal-slider/horizontal-slider.component';
+import { SliderComponent } from './slider/slider.component';
 import { VerticalSliderComponent } from './vertical-slider/vertical-slider.component';
 import { ResizeHandleDirective } from './resize-handle.directive';
 import { ResizePanelDirective } from './resize-panel.directive';
@@ -11,7 +11,7 @@ import { ResizePanelDirective } from './resize-panel.directive';
   declarations: [
     ResizePanelDirective,
     ResizeHandleDirective,
-    HorizontalSliderComponent,
+    SliderComponent,
     VerticalSliderComponent,
   ],
   imports: [
@@ -19,7 +19,7 @@ import { ResizePanelDirective } from './resize-panel.directive';
     BrowserAnimationsModule
   ],
   exports: [
-    HorizontalSliderComponent,
+    SliderComponent,
     VerticalSliderComponent]
 })
 export class SliderModule { }

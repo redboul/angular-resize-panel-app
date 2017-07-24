@@ -1,0 +1,12 @@
+<div [class.horizontalSlideBar]="orientation === 'y'" 
+  [class.verticalSlideBar]="orientation !== 'y'"
+resize-panel (handleClick)="togglePanel($event)" 
+(@slide.done)="animationDone($event)" [@slide]="slideState" >
+   <div class="handleBar-vertical" resize-handle>
+      <div class="handleBar-handle-vertical"></div>
+  
+    </div>
+    <div [class.horizontalSlideBar]="orientation === 'y'" 
+    [class.verticalSlideBar]="orientation !== 'y'"
+    (click)="openPanel()" (touchstart)="openPanel()"><ng-content></ng-content></div>
+</div>
