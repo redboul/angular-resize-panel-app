@@ -24,9 +24,7 @@ export class ResizePanelDirective implements AfterViewInit {
 
   @Input() private direction: string;
   @Output() handleClick = new EventEmitter<any>();
-  private originalWidth = 0;
-  private originalHeight = 0;
-
+  
   @ContentChildren(ResizeHandleDirective)
   private resizeHandles: QueryList<ResizeHandleDirective>;
 
@@ -35,8 +33,6 @@ export class ResizePanelDirective implements AfterViewInit {
 
   ngAfterViewInit() {
     this.direction = this.direction || 'x';
-    this.originalHeight = this.el.nativeElement.offsetHeight;
-    this.originalWidth = this.el.nativeElement.offsetWidth;
     this.resizeHandles.forEach((handle: ResizeHandleDirective) => {
       handle.mouseMove$.subscribe(mouseEvent => this.increaseSize(mouseEvent));
       handle.mouseDown$

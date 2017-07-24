@@ -15,7 +15,7 @@ export class SliderComponent implements OnInit {
   @Input() reducedSize?: number;
   slideState: any;
   type = '';
-  constructor() { }
+  constructor(private el: ElementRef) { }
 
   ngOnInit() {
     if (this.direction === 'y') {
@@ -23,10 +23,14 @@ export class SliderComponent implements OnInit {
     }
     this.slideState = { value: `${this.type}cancel`};
     if (!this.defaultSize) {
-      this.defaultSize = 140;
+      if (this.direction === 'y') {
+        this.defaultSize = this.el.nativeElement.offsetHeight;
+      } else {
+        this.defaultSize = this.el.nativeElement.offsetWidth;
+      }
     }
     if (!this.reducedSize) {
-      this.reducedSize = 30;
+      this.reducedSize = 0;
     }
   }
 
@@ -35,7 +39,7 @@ export class SliderComponent implements OnInit {
   }
 
   animationDone(event) {
-    if (this.slideState && this.slideState.params && this.slideState.params.amount) {
+    if (this.slideState && this.slideState.params && this.slideState.params.amount !== undefined) {
       if (this.direction === 'y') {
         event.element.style.height = this.slideState.params.amount + 'px';
       } else {
