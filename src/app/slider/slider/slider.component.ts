@@ -11,6 +11,8 @@ import { Component, ElementRef, Input, OnInit } from '@angular/core';
 })
 export class SliderComponent implements OnInit {
   @Input() direction?: string;
+  @Input() defaultSize?: number;
+  @Input() reducedSize?: number;
   slideState: any;
   type = '';
   constructor() { }
@@ -20,10 +22,16 @@ export class SliderComponent implements OnInit {
       this.type = 'v';
     }
     this.slideState = { value: `${this.type}cancel`};
+    if (!this.defaultSize) {
+      this.defaultSize = 140;
+    }
+    if (!this.reducedSize) {
+      this.reducedSize = 30;
+    }
   }
 
   openPanel() {
-    this.togglePanel({type: eventTypes.clickeInside, amount: 140});
+    this.togglePanel({type: eventTypes.clickedInside, amount: this.defaultSize});
   }
 
   animationDone(event) {
@@ -40,10 +48,10 @@ export class SliderComponent implements OnInit {
     if (event.type === eventTypes.cancel) {
       this.slideState = { value: `${this.type}cancel` };
     } else {
-      if (this.slideState.value !== `${this.type}out` && event.type !== eventTypes.clickeInside) {
-        this.slideState = { value: `${this.type}out`, params: { amount: 30 }};
+      if (this.slideState.value !== `${this.type}out` && event.type !== eventTypes.clickedInside) {
+        this.slideState = { value: `${this.type}out`, params: { amount: this.reducedSize }};
       } else if (this.slideState.value === `${this.type}out`) {
-        this.slideState = { value: `${this.type}in`, params: { amount: event.amount } };
+        this.slideState = { value: `${this.type}in`, params: { amount: event.amount || this.defaultSize} };
       }
     }
   }

@@ -41,7 +41,7 @@ export class ResizePanelDirective implements AfterViewInit {
       handle.mouseMove$.subscribe(mouseEvent => this.increaseSize(mouseEvent));
       handle.mouseDown$
         .subscribe((event) =>
-          this.handleClick.next({ amount: (this.direction === 'x') ? this.originalWidth : this.originalHeight })
+          this.handleClick.next({})
         );
     });
   }
