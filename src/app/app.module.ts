@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { SliderModule } from './slider';
+import { ResizePanelModule } from 'angular-resize-panel';
 
 @NgModule({
   declarations: [
@@ -14,9 +14,8 @@ import { SliderModule } from './slider';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    SliderModule
+    ResizePanelModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
